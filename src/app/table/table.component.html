@@ -1,0 +1,47 @@
+<div class="container">
+    <h2>User Details Table</h2>
+        <div class="card text-center m-3">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th [appSort]="uerData" data-order="desc" data-name="name" scope="col">Name <i class="fa fa-fw fa-sort"></i></th>
+                    <th [appSort]="uerData" data-order="desc" data-name="email" scope="col">Email <i class="fa fa-fw fa-sort"></i></th>
+                    <th [appSort]="uerData" data-order="desc" data-name="age" scope="col">Gender <i class="fa fa-fw fa-sort"></i></th>
+                    <th [appSort]="uerData" data-order="desc" data-name="gender" scope="col">Age <i class="fa fa-fw fa-sort"></i></th>
+                    <th [appSort]="uerData" data-order="desc" data-name="dob" scope="col">dob <i class="fa fa-fw fa-sort"></i></th>
+                    <th>upload</th>
+                    <th>dowload</th>
+                    <th>
+                        select all
+                        <input type="checkbox" id="selectAll" (ngModelChange)="selectAllChanged($event)" [(ngModel)]="selectAll">
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of uerData; let i = index">
+                    <td>{{data.name}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.age}}</td>
+                    <td>{{data.gender}}</td>
+                    <td>{{data.dob}}</td>
+                    <td>
+                        <div class="form-group">
+                        <input type="file"
+                        [attr.id]="'file' + i"
+                        (change)="handleFileInput($event.target.files,data.userId)">
+                    </div>
+                    </td>
+                    <td>
+                        <button (click)="downloadFile(data.profilePhoto)">click here</button>
+                    </td>
+                    <td>
+                        <input type="checkbox" [attr.id]="'check' + i" [(ngModel)]="data.isSelected">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            <div class="card-footer pb-0 pt-3">
+                <jw-pagination [items]="userList" (changePage)="onChangePage($event)"></jw-pagination>
+            </div>
+        </div>
+  </div>
